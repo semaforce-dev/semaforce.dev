@@ -193,6 +193,7 @@ h2 {
 }
 
 .intro p:not(.section-kicker),
+.section-heading p:not(.section-kicker),
 .split-copy p,
 .contact p {
   margin: 0;
@@ -229,6 +230,33 @@ h2 {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
 }
 
+.competencies {
+  width: 100%;
+  padding-inline: max(18px, calc((100vw - 1160px) / 2));
+  background: #f9fbf7;
+}
+
+.competency-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid #cfdad4;
+  background: #cfdad4;
+}
+
+.competency-grid article {
+  min-height: 210px;
+  padding: 24px;
+  background: var(--white);
+}
+
+.competency-grid h3 {
+  margin: 0 0 12px;
+  color: var(--green);
+  font-size: 1.2rem;
+  line-height: 1.18;
+}
+
 .card-icon {
   display: inline-grid;
   width: 40px;
@@ -250,6 +278,7 @@ h2 {
 }
 
 .card p,
+.competency-grid p,
 .timeline p,
 .talent-panel li,
 .stat span {
@@ -428,6 +457,7 @@ footer {
   .split,
   .contact,
   .grid.three,
+  .competency-grid,
   .timeline,
   .proof {
     grid-template-columns: 1fr;
