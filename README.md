@@ -62,7 +62,7 @@ hosted for $0 from a public repository.
 
 The `CNAME` file binds the Pages deployment to `semaforce.dev`.
 
-DNS still needs to be pointed from Squarespace Domains to GitHub Pages:
+Squarespace Domains DNS is pointed to GitHub Pages:
 
 ```text
 A     @    185.199.108.153
@@ -76,8 +76,9 @@ AAAA  @    2606:50c0:8003::153
 CNAME www  semaforce-dev.github.io
 ```
 
-After DNS resolves, enable "Enforce HTTPS" in the repository Pages settings if
-GitHub has not enabled it automatically.
+The site is live at `http://semaforce.dev/`. GitHub Pages HTTPS enforcement is
+pending certificate issuance; retry enabling "Enforce HTTPS" after GitHub
+finishes provisioning the certificate.
 
 ## Next Iterations
 
