@@ -50,6 +50,31 @@ Logs are written under:
 ~/Library/Logs/HermesPreview/
 ```
 
+## Production Hosting
+
+The production path is GitHub Pages because this is a static site and can be
+hosted for $0 from a public repository.
+
+- Repository: `semaforce-dev/semaforce.dev`
+- Production domain: `https://semaforce.dev`
+- Deployment: `.github/workflows/deploy-pages.yml`
+- Trigger: every push to `main` or `master`, plus manual `workflow_dispatch`
+
+The `CNAME` file binds the Pages deployment to `semaforce.dev`.
+
+DNS still needs to be pointed from Squarespace Domains to GitHub Pages:
+
+```text
+A     @    185.199.108.153
+A     @    185.199.109.153
+A     @    185.199.110.153
+A     @    185.199.111.153
+CNAME www  semaforce-dev.github.io
+```
+
+After DNS resolves, enable "Enforce HTTPS" in the repository Pages settings if
+GitHub has not enabled it automatically.
+
 ## Next Iterations
 
 - Replace the stock hero image with a SemaForce-owned visual asset or generated brand image.
