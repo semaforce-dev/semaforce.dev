@@ -8,6 +8,7 @@ Local-first static prototype built by Hermes/Codex.
 - HermesBrain business records around SemaForce marketing, staffing partnerships, Upwork consulting, and data-engineering opportunities.
 - Lucas resume source for software leadership, backend/platform, cloud, data, DevOps, observability, and systems competencies.
 - Public Semaforce/DevOps-security positioning was treated as directional only, not copied as a verified claim for SemaForce LLC.
+- Favicon uses the compact SemaForce SF mark in the site palette until the final source logo package is selected.
 
 ## Run Locally
 
