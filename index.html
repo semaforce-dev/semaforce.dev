@@ -36,6 +36,31 @@
     <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="preconnect" href="https://www.google.com" />
     <link rel="preconnect" href="https://t0.gstatic.com" />
+    <script>
+      (() => {
+        try {
+          const themePreference = localStorage.getItem("semaforce-theme") || "system";
+          const languagePreference = localStorage.getItem("semaforce-language") || "system";
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const prefersSpanish = navigator.language.toLowerCase().startsWith("es");
+
+          document.documentElement.dataset.theme =
+            themePreference === "dark" || (themePreference === "system" && prefersDark)
+              ? "dark"
+              : "light";
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.lang =
+            languagePreference === "es" || (languagePreference === "system" && prefersSpanish)
+              ? "es"
+              : "en";
+          document.documentElement.dataset.languagePreference = languagePreference;
+        } catch (error) {
+          document.documentElement.dataset.theme = "light";
+          document.documentElement.dataset.themePreference = "system";
+          document.documentElement.dataset.languagePreference = "system";
+        }
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <script type="application/ld+json">
       {
@@ -213,6 +238,20 @@
         <a href="#work">Work</a>
         <a href="#contact">Contact</a>
       </nav>
+      <div class="site-controls" aria-label="Display preferences">
+        <div class="segmented-control" data-control="theme" aria-label="Theme preference">
+          <span>Theme</span>
+          <button type="button" data-theme-choice="system" aria-pressed="true">Auto</button>
+          <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+          <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+        </div>
+        <div class="segmented-control" data-control="language" aria-label="Language preference">
+          <span>Language</span>
+          <button type="button" data-language-choice="system" aria-pressed="true">Auto</button>
+          <button type="button" data-language-choice="en" aria-pressed="false">EN</button>
+          <button type="button" data-language-choice="es" aria-pressed="false">ES</button>
+        </div>
+      </div>
     </header>
 
     <main id="top">
@@ -685,6 +724,290 @@
       <a href="mailto:lucas@semaforce.dev">lucas@semaforce.dev</a>
     </footer>
     <script>
+      const spanishCopy = {
+        "Clients": "Clientes",
+        "Competencies": "Competencias",
+        "Security": "Seguridad",
+        "Data Science": "Ciencia de datos",
+        "Experience": "Experiencia",
+        "Talent": "Talento",
+        "Work": "Trabajo",
+        "Contact": "Contacto",
+        "Theme": "Tema",
+        "Light": "Claro",
+        "Dark": "Oscuro",
+        "Language": "Idioma",
+        "Technical talent. Delivery discipline. Security-aware execution.": "Talento tecnico. Disciplina de entrega. Ejecucion con seguridad.",
+        "We help teams find the people, patterns, and engineering capacity they need to ship confidently when the work is complex, urgent, or hard to staff.": "Ayudamos a los equipos a encontrar las personas, los patrones y la capacidad de ingenieria que necesitan para entregar con confianza cuando el trabajo es complejo, urgente o dificil de cubrir.",
+        "Start a conversation": "Iniciar una conversacion",
+        "See how we help": "Ver como ayudamos",
+        "For companies scaling technical work": "Para empresas que escalan trabajo tecnico",
+        "Senior help without the handoff tax.": "Ayuda senior sin el costo de traspaso.",
+        "SemaForce sits between talent acquisition, technical consulting, and delivery support. We focus on matching capable engineers to real business problems, then keeping execution grounded in clear communication, practical architecture, and measurable progress.": "SemaForce se ubica entre adquisicion de talento, consultoria tecnica y apoyo de entrega. Nos enfocamos en conectar ingenieros capaces con problemas reales de negocio, manteniendo la ejecucion basada en comunicacion clara, arquitectura practica y progreso medible.",
+        "For clients": "Para clientes",
+        "Find the right technical force for the work.": "Encuentra la fuerza tecnica adecuada para el trabajo.",
+        "Targeted technical recruiting": "Reclutamiento tecnico dirigido",
+        "Source and screen engineers for specialized roles in backend, cloud, AI, data, automation, and systems work where generic pipelines stall, including candidates who need coordinated H-1B transfer or renewal support.": "Buscamos y evaluamos ingenieros para roles especializados en backend, nube, IA, datos, automatizacion y sistemas donde los procesos genericos se estancan, incluso candidatos que necesitan apoyo coordinado para transferencias o renovaciones H-1B.",
+        "Delivery-ready talent pods": "Equipos de talento listos para entregar",
+        "Assemble practical teams around scoped outcomes, with the operating rhythm to move from requirements to working software.": "Formamos equipos practicos alrededor de resultados definidos, con el ritmo operativo necesario para pasar de requisitos a software funcionando.",
+        "Security-aware execution": "Ejecucion consciente de seguridad",
+        "Bring audit, hardening, reliability, and compliance thinking into everyday delivery decisions before avoidable risk becomes expensive.": "Integramos auditoria, fortalecimiento, confiabilidad y cumplimiento en las decisiones diarias de entrega antes de que el riesgo evitable se vuelva costoso.",
+        "Team competencies": "Competencias del equipo",
+        "A bench built around real software delivery.": "Una red de talento construida alrededor de entrega real de software.",
+        "SemaForce draws from hands-on leadership across backend platforms, cloud migration, regulated software, AI-enabled products, and the operating habits that keep teams shipping.": "SemaForce se apoya en liderazgo practico en plataformas backend, migracion a la nube, software regulado, productos con IA y habitos operativos que mantienen a los equipos entregando.",
+        "Systems languages": "Lenguajes de sistemas",
+        "Rust, Java, and the JVM": "Rust, Java y la JVM",
+        "Rust services and libraries, Java platforms, Kotlin/Scala-adjacent JVM work, API design, concurrency, testing, and production-grade service maintenance.": "Servicios y librerias en Rust, plataformas Java, trabajo JVM cercano a Kotlin y Scala, diseno de APIs, concurrencia, pruebas y mantenimiento de servicios de produccion.",
+        "Cloud platforms": "Plataformas cloud",
+        "AWS, GCP, Azure, and smaller clouds": "AWS, GCP, Azure y nubes mas pequenas",
+        "Cloud architecture, migrations, IAM, networking, queues, storage, databases, serverless, observability, and pragmatic hosting on providers from hyperscalers to Linode-style platforms.": "Arquitectura cloud, migraciones, IAM, redes, colas, almacenamiento, bases de datos, serverless, observabilidad y hosting pragmatico en proveedores desde hyperscalers hasta plataformas tipo Linode.",
+        "Infrastructure as code": "Infraestructura como codigo",
+        "Terraform, Terragrunt, Kubernetes, Docker": "Terraform, Terragrunt, Kubernetes, Docker",
+        "Reproducible environments, Kubernetes and ecosystem tooling, container build pipelines, CI/CD, release safety, secrets handling, and operational runbooks.": "Entornos reproducibles, Kubernetes y herramientas del ecosistema, pipelines de contenedores, CI/CD, seguridad de releases, manejo de secretos y runbooks operativos.",
+        "Product interfaces": "Interfaces de producto",
+        "React, Next.js, Angular, Tailwind, WASM": "React, Next.js, Angular, Tailwind, WASM",
+        "Frontend systems that support real workflows: dashboards, internal tools, polished marketing sites, component patterns, performance, accessibility, and WebAssembly paths.": "Sistemas frontend que soportan flujos reales: dashboards, herramientas internas, sitios de marketing pulidos, patrones de componentes, rendimiento, accesibilidad y caminos con WebAssembly.",
+        "Mobile and runtimes": "Movil y runtimes",
+        "Swift/iOS, Node.js, and service ecosystems": "Swift/iOS, Node.js y ecosistemas de servicios",
+        "Swift and iOS development, Node.js backends, TypeScript tooling, integrations, automation scripts, and full-stack glue that keeps products moving.": "Desarrollo Swift e iOS, backends Node.js, herramientas TypeScript, integraciones, scripts de automatizacion y el pegamento full-stack que mantiene los productos avanzando.",
+        "AI-enabled delivery": "Entrega habilitada por IA",
+        "Chatbots, agents, retrieval, and workflow automation": "Chatbots, agentes, recuperacion y automatizacion de flujos",
+        "Useful assistants, agentic flows, retrieval-aware systems, tool orchestration, human-in-the-loop controls, and memory systems built for actual business use.": "Asistentes utiles, flujos agenticos, sistemas con recuperacion, orquestacion de herramientas, controles con humano en el circuito y sistemas de memoria para uso real de negocio.",
+        "Security and resilience": "Seguridad y resiliencia",
+        "Security work that understands how systems actually run.": "Trabajo de seguridad que entiende como operan los sistemas reales.",
+        "SemaForce can assess risk, improve controls, and harden real production systems across application code, infrastructure, cloud platforms, AI workflows, and regulated data.": "SemaForce puede evaluar riesgos, mejorar controles y fortalecer sistemas reales de produccion en codigo de aplicacion, infraestructura, plataformas cloud, flujos de IA y datos regulados.",
+        "Security audits and risk reviews": "Auditorias de seguridad y revision de riesgos",
+        "Practical reviews of architecture, access paths, data exposure, dependency risk, operational controls, logging, secrets, and deployment practices.": "Revisiones practicas de arquitectura, rutas de acceso, exposicion de datos, riesgo de dependencias, controles operativos, logging, secretos y practicas de despliegue.",
+        "Cloud and infrastructure hardening": "Fortalecimiento de nube e infraestructura",
+        "IAM, network boundaries, Kubernetes posture, container security, Terraform guardrails, backup strategy, encryption, observability, and least-privilege operations.": "IAM, limites de red, postura de Kubernetes, seguridad de contenedores, guardrails de Terraform, estrategia de backups, cifrado, observabilidad y operaciones de minimo privilegio.",
+        "Application and platform security": "Seguridad de aplicacion y plataforma",
+        "Secure API design, authentication and authorization, threat modeling, secure SDLC habits, CI/CD checks, vulnerability remediation, and safe release patterns.": "Diseno seguro de APIs, autenticacion y autorizacion, modelado de amenazas, habitos de SDLC seguro, chequeos CI/CD, remediacion de vulnerabilidades y patrones seguros de release.",
+        "AI and data security": "Seguridad de IA y datos",
+        "Prompt and tool boundary design, retrieval safety, sensitive-data handling, model evaluation controls, auditability, and privacy-aware AI workflows.": "Diseno de limites para prompts y herramientas, seguridad de recuperacion, manejo de datos sensibles, controles de evaluacion de modelos, auditabilidad y flujos de IA conscientes de privacidad.",
+        "Regulated environment controls": "Controles para entornos regulados",
+        "PHI-sensitive delivery, financial and healthcare risk posture, evidence collection, access review support, policy implementation, and operational documentation.": "Entrega sensible a PHI, postura de riesgo financiero y sanitario, recoleccion de evidencia, apoyo en revisiones de acceso, implementacion de politicas y documentacion operativa.",
+        "Incident readiness and remediation": "Preparacion y remediacion de incidentes",
+        "Runbooks, alerting, recovery plans, post-incident follow-through, prioritized fixes, and leadership communication that turns findings into measurable improvements.": "Runbooks, alertas, planes de recuperacion, seguimiento post-incidente, correcciones priorizadas y comunicacion ejecutiva que convierte hallazgos en mejoras medibles.",
+        "Data science and applied intelligence": "Ciencia de datos e inteligencia aplicada",
+        "From executive questions to production models.": "De preguntas ejecutivas a modelos en produccion.",
+        "SemaForce can bring in senior data scientists and applied ML specialists through our contract network when the problem needs deeper statistical, mathematical, or research support.": "SemaForce puede incorporar cientificos de datos senior y especialistas en ML aplicado mediante nuestra red de contratos cuando el problema requiere apoyo estadistico, matematico o de investigacion mas profundo.",
+        "Machine learning and prediction": "Machine learning y prediccion",
+        "Classification, regression, forecasting, ranking, anomaly detection, recommendations, churn/risk scoring, model evaluation, and deployment-aware ML design.": "Clasificacion, regresion, pronosticos, ranking, deteccion de anomalias, recomendaciones, scoring de churn/riesgo, evaluacion de modelos y diseno de ML pensado para despliegue.",
+        "Statistics and experimentation": "Estadistica y experimentacion",
+        "Causal inference, A/B testing, power analysis, cohort analysis, experiment design, uncertainty quantification, and decision support for ambiguous business questions.": "Inferencia causal, pruebas A/B, analisis de potencia, analisis de cohortes, diseno experimental, cuantificacion de incertidumbre y apoyo a decisiones en preguntas de negocio ambiguas.",
+        "NLP, retrieval, and unstructured data": "NLP, recuperacion y datos no estructurados",
+        "Document intelligence, semantic search, entity extraction, LLM evaluation, knowledge graphs, text classification, summarization, and retrieval quality measurement.": "Inteligencia documental, busqueda semantica, extraccion de entidades, evaluacion de LLMs, grafos de conocimiento, clasificacion de texto, resumen y medicion de calidad de recuperacion.",
+        "Optimization and operations research": "Optimizacion e investigacion de operaciones",
+        "Scheduling, routing, allocation, pricing support, simulation, constraint modeling, workforce planning, and operational decision systems.": "Scheduling, rutas, asignacion, apoyo de precios, simulacion, modelado de restricciones, planificacion de fuerza laboral y sistemas de decision operativa.",
+        "Data platforms and analytics engineering": "Plataformas de datos e ingenieria analitica",
+        "SQL, Python, Spark, dbt-style modeling, warehouses, lakehouses, feature pipelines, BI foundations, data quality, lineage, and metrics layers.": "SQL, Python, Spark, modelado estilo dbt, warehouses, lakehouses, pipelines de features, bases de BI, calidad de datos, linaje y capas de metricas.",
+        "Responsible and regulated AI": "IA responsable y regulada",
+        "Model governance, auditability, bias checks, privacy-aware workflows, PHI-sensitive analytics, explainability, and controls for regulated environments.": "Gobernanza de modelos, auditabilidad, chequeos de sesgo, flujos conscientes de privacidad, analitica sensible a PHI, explicabilidad y controles para entornos regulados.",
+        "Portfolio foundation": "Base de portafolio",
+        "Experience across regulated, operationally serious environments.": "Experiencia en entornos regulados y operacionalmente serios.",
+        "This is the beginning of a deeper portfolio. Today it shows the kinds of companies, industries, and technical contexts SemaForce can credibly support.": "Este es el comienzo de un portafolio mas profundo. Hoy muestra los tipos de empresas, industrias y contextos tecnicos que SemaForce puede apoyar con credibilidad.",
+        "Companies with relevant team experience": "Empresas con experiencia relevante del equipo",
+        "Finance and investing platforms": "Plataformas financieras y de inversion",
+        "Hermes-backed workforce intelligence and HR product work": "Inteligencia de fuerza laboral y producto HR respaldado por Hermes",
+        "HR technology and people operations": "Tecnologia HR y operaciones de personas",
+        "Healthcare and PHI-sensitive systems": "Salud y sistemas sensibles a PHI",
+        "Telecom and broadband operations": "Telecomunicaciones y operaciones de banda ancha",
+        "Insurance technology and AI claims": "Tecnologia de seguros y reclamos con IA",
+        "Industry experience": "Experiencia por industria",
+        "Finance": "Finanzas",
+        "Banking": "Banca",
+        "Telecom": "Telecom",
+        "Healthcare": "Salud",
+        "Regulated environments": "Entornos regulados",
+        "HR products": "Productos HR",
+        "Licensing": "Licencias",
+        "Insurance technology": "Tecnologia de seguros",
+        "Security audits": "Auditorias de seguridad",
+        "Data science": "Ciencia de datos",
+        "Applied AI": "IA aplicada",
+        "Startups and enterprises": "Startups y empresas grandes",
+        "For talent": "Para talento",
+        "Good engineers deserve better-fit opportunities.": "Los buenos ingenieros merecen oportunidades mejor alineadas.",
+        "We look for people who communicate clearly, learn quickly, and take ownership. The goal is not to flood you with roles. It is to connect you with work where your skill actually matters.": "Buscamos personas que comuniquen con claridad, aprendan rapido y asuman responsabilidad. La meta no es inundarte de roles, sino conectarte con trabajo donde tu habilidad realmente importa.",
+        "Data engineering, SQL, Python, Snowflake, and cloud data workflows": "Ingenieria de datos, SQL, Python, Snowflake y flujos de datos en la nube",
+        "Data science, applied ML, statistics, experimentation, and research support": "Ciencia de datos, ML aplicado, estadistica, experimentacion y apoyo de investigacion",
+        "Backend, API, automation, and platform engineering": "Backend, APIs, automatizacion e ingenieria de plataforma",
+        "AI chatbot, retrieval, and agentic workflow development": "Desarrollo de chatbots de IA, recuperacion y flujos agenticos",
+        "H-1B transfer and renewal coordination for qualified technical roles": "Coordinacion de transferencias y renovaciones H-1B para roles tecnicos calificados",
+        "Security-minded builders who can work with product and operations": "Constructores con mentalidad de seguridad que pueden trabajar con producto y operaciones",
+        "Consultants comfortable with ambiguity, clients, and outcomes": "Consultores comodos con ambiguedad, clientes y resultados",
+        "How we work": "Como trabajamos",
+        "A practical operating model for urgent technical needs.": "Un modelo operativo practico para necesidades tecnicas urgentes.",
+        "Clarify the real gap": "Aclarar la brecha real",
+        "We map the role, technical environment, delivery expectations, and constraints before deciding whether you need a hire, consultant, or pod.": "Mapeamos el rol, el entorno tecnico, las expectativas de entrega y las restricciones antes de decidir si necesitas una contratacion, un consultor o un equipo.",
+        "Match for execution": "Conectar para ejecutar",
+        "Candidates and collaborators are assessed for the actual work, not just keywords. Communication, ownership, and practical sponsorship logistics are treated as part of making the placement work.": "Los candidatos y colaboradores se evaluan para el trabajo real, no solo por palabras clave. Comunicacion, ownership y logistica practica de sponsorship forman parte de hacer que la colocacion funcione.",
+        "Stay close to outcomes": "Mantenernos cerca de los resultados",
+        "We keep feedback loops short so clients know what is moving, what is blocked, and where the next decision needs to happen.": "Mantenemos ciclos de feedback cortos para que los clientes sepan que avanza, que esta bloqueado y donde debe tomarse la siguiente decision.",
+        "Chatbots, agents, retrieval, automation": "Chatbots, agentes, recuperacion, automatizacion",
+        "AWS, GCP, Azure, Kubernetes, Terraform": "AWS, GCP, Azure, Kubernetes, Terraform",
+        "Rust, JVM, Node.js, APIs, backend systems": "Rust, JVM, Node.js, APIs, sistemas backend",
+        "Audits, cloud hardening, AI controls, PHI": "Auditorias, hardening cloud, controles IA, PHI",
+        "Questions we can answer quickly": "Preguntas que podemos responder rapido",
+        "Clear scope for searchers, buyers, and AI systems.": "Alcance claro para buscadores, compradores y sistemas de IA.",
+        "What does SemaForce do?": "Que hace SemaForce?",
+        "SemaForce helps companies staff and deliver complex software work with senior technical talent, delivery support, security-aware execution, cloud engineering, AI, and data science capability.": "SemaForce ayuda a empresas a cubrir y entregar trabajo complejo de software con talento tecnico senior, apoyo de entrega, ejecucion consciente de seguridad, ingenieria cloud, IA y ciencia de datos.",
+        "Which technologies can SemaForce cover?": "Que tecnologias cubre SemaForce?",
+        "Rust, Java and JVM languages, AWS, GCP, Azure, smaller cloud platforms, Terraform, Terragrunt, Kubernetes, Docker, React, Next.js, Angular, Tailwind CSS, WebAssembly, Swift, iOS, Node.js, AI workflows, and data platforms.": "Rust, Java y lenguajes JVM, AWS, GCP, Azure, plataformas cloud mas pequenas, Terraform, Terragrunt, Kubernetes, Docker, React, Next.js, Angular, Tailwind CSS, WebAssembly, Swift, iOS, Node.js, flujos de IA y plataformas de datos.",
+        "Can SemaForce help with security audits?": "Puede SemaForce ayudar con auditorias de seguridad?",
+        "Yes. We can support security audits, cloud hardening, application security review, AI security controls, regulated-environment controls, PHI-sensitive delivery, and remediation planning.": "Si. Podemos apoyar auditorias de seguridad, hardening cloud, revision de seguridad de aplicaciones, controles de seguridad de IA, controles de entornos regulados, entrega sensible a PHI y planificacion de remediacion.",
+        "Does SemaForce work in regulated industries?": "Trabaja SemaForce en industrias reguladas?",
+        "Yes. Relevant experience spans fintech, finance, banking, telecom, healthcare, PHI-sensitive systems, HR products, govtech, licensing, insurance technology, startups, and large enterprises.": "Si. La experiencia relevante incluye fintech, finanzas, banca, telecom, salud, sistemas sensibles a PHI, productos HR, govtech, licencias, tecnologia de seguros, startups y grandes empresas.",
+        "Can SemaForce support H-1B technical talent needs?": "Puede SemaForce apoyar necesidades de talento tecnico H-1B?",
+        "Yes. SemaForce can coordinate H-1B transfer and renewal support for qualified technical roles as part of recruiting, placement, and delivery support.": "Si. SemaForce puede coordinar apoyo para transferencias y renovaciones H-1B en roles tecnicos calificados como parte de reclutamiento, colocacion y apoyo de entrega.",
+        "Bring us the hard-to-fill role or the work that needs traction.": "Traenos el rol dificil de cubrir o el trabajo que necesita traccion.",
+        "Tell us what you are building, where the team is stuck, and what kind of help would make the next ninety days materially easier.": "Cuentanos que estas construyendo, donde esta atascado el equipo y que tipo de ayuda haria que los proximos noventa dias sean materialmente mas faciles.",
+        "Name": "Nombre",
+        "Email": "Correo",
+        "Company": "Empresa",
+        "What do you need help with?": "En que necesitas ayuda?",
+        "Send inquiry": "Enviar consulta"
+      };
+
+      const textNodes = [];
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          const parent = node.parentElement;
+          if (!parent || ["SCRIPT", "STYLE", "NOSCRIPT"].includes(parent.tagName)) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        },
+      });
+
+      while (walker.nextNode()) {
+        textNodes.push({
+          node: walker.currentNode,
+          source: walker.currentNode.nodeValue,
+          key: walker.currentNode.nodeValue.replace(/\s+/g, " ").trim(),
+        });
+      }
+
+      const themeMedia = window.matchMedia("(prefers-color-scheme: dark)");
+      const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+      const descriptionMeta = document.querySelector('meta[name="description"]');
+      const subjectInput = document.querySelector('input[name="_subject"]');
+
+      const getStoredPreference = (key, fallback) => {
+        try {
+          return localStorage.getItem(key) || fallback;
+        } catch (error) {
+          return fallback;
+        }
+      };
+
+      const setStoredPreference = (key, value) => {
+        try {
+          localStorage.setItem(key, value);
+        } catch (error) {
+          return undefined;
+        }
+        return undefined;
+      };
+
+      const resolveTheme = (preference) =>
+        preference === "dark" || (preference === "system" && themeMedia.matches)
+          ? "dark"
+          : "light";
+
+      const resolveLanguage = (preference) =>
+        preference === "es" ||
+        (preference === "system" && navigator.language.toLowerCase().startsWith("es"))
+          ? "es"
+          : "en";
+
+      const applyTheme = (preference) => {
+        const effectiveTheme = resolveTheme(preference);
+        document.documentElement.dataset.theme = effectiveTheme;
+        document.documentElement.dataset.themePreference = preference;
+        if (themeColorMeta) {
+          themeColorMeta.content = effectiveTheme === "dark" ? "#070d0b" : "#101817";
+        }
+
+        document.querySelectorAll("[data-theme-choice]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.themeChoice === preference));
+        });
+      };
+
+      const applyLanguage = (preference) => {
+        const language = resolveLanguage(preference);
+        document.documentElement.lang = language;
+        document.documentElement.dataset.language = language;
+        document.documentElement.dataset.languagePreference = preference;
+
+        textNodes.forEach(({ node, source, key }) => {
+          const leading = source.match(/^\s*/)[0];
+          const trailing = source.match(/\s*$/)[0];
+          node.nodeValue = `${leading}${language === "es" ? spanishCopy[key] || key : key}${trailing}`;
+        });
+
+        document.title =
+          language === "es"
+            ? "SemaForce | Talento en nube, IA, seguridad y software regulado"
+            : "SemaForce | Cloud, AI, Security & Regulated Software Talent";
+        if (descriptionMeta) {
+          descriptionMeta.content =
+            language === "es"
+              ? "SemaForce ayuda a empresas a cubrir y entregar trabajo complejo de software en nube, IA, ciencia de datos, seguridad, sistemas regulados y apoyo tecnico H-1B."
+              : "SemaForce helps companies staff and deliver complex software work across cloud, AI, data science, security, regulated systems, and H-1B technical talent support.";
+        }
+        if (subjectInput) {
+          subjectInput.value = language === "es" ? "Nueva consulta de SemaForce" : "New SemaForce inquiry";
+        }
+
+        document.querySelectorAll("[data-language-choice]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.languageChoice === preference));
+        });
+
+        document.querySelector("nav")?.setAttribute(
+          "aria-label",
+          language === "es" ? "Navegacion principal" : "Main navigation",
+        );
+        document.querySelector(".site-controls")?.setAttribute(
+          "aria-label",
+          language === "es" ? "Preferencias de visualizacion" : "Display preferences",
+        );
+        document.querySelector('[data-control="theme"]')?.setAttribute(
+          "aria-label",
+          language === "es" ? "Preferencia de tema" : "Theme preference",
+        );
+        document.querySelector('[data-control="language"]')?.setAttribute(
+          "aria-label",
+          language === "es" ? "Preferencia de idioma" : "Language preference",
+        );
+      };
+
+      const themePreference = getStoredPreference("semaforce-theme", "system");
+      const languagePreference = getStoredPreference("semaforce-language", "system");
+      applyTheme(themePreference);
+      applyLanguage(languagePreference);
+
+      document.querySelectorAll("[data-theme-choice]").forEach((button) => {
+        button.addEventListener("click", () => {
+          setStoredPreference("semaforce-theme", button.dataset.themeChoice);
+          applyTheme(button.dataset.themeChoice);
+        });
+      });
+
+      document.querySelectorAll("[data-language-choice]").forEach((button) => {
+        button.addEventListener("click", () => {
+          setStoredPreference("semaforce-language", button.dataset.languageChoice);
+          applyLanguage(button.dataset.languageChoice);
+        });
+      });
+
+      themeMedia.addEventListener("change", () => {
+        const preference = getStoredPreference("semaforce-theme", "system");
+        if (preference === "system") {
+          applyTheme(preference);
+        }
+      });
+
       const contactForm = document.querySelector(".contact-form");
 
       if (contactForm && window.fetch) {
@@ -695,9 +1018,10 @@
           const status = contactForm.querySelector(".form-status");
           const action = contactForm.dataset.ajaxAction;
           const formData = new FormData(contactForm);
+          const language = document.documentElement.lang;
 
           submitButton.disabled = true;
-          submitButton.textContent = "Sending...";
+          submitButton.textContent = language === "es" ? "Enviando..." : "Sending...";
           status.textContent = "";
 
           try {
@@ -714,7 +1038,9 @@
             window.location.href = "/thanks.html";
           } catch (error) {
             status.textContent =
-              "We could not send this inline. Opening the secure fallback now.";
+              language === "es"
+                ? "No pudimos enviar esto aqui. Abriendo el envio seguro de respaldo."
+                : "We could not send this inline. Opening the secure fallback now.";
             contactForm.submit();
           }
         });

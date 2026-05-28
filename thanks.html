@@ -24,6 +24,31 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://semaforce.dev/assets/social-card.png" />
+    <script>
+      (() => {
+        try {
+          const themePreference = localStorage.getItem("semaforce-theme") || "system";
+          const languagePreference = localStorage.getItem("semaforce-language") || "system";
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const prefersSpanish = navigator.language.toLowerCase().startsWith("es");
+
+          document.documentElement.dataset.theme =
+            themePreference === "dark" || (themePreference === "system" && prefersDark)
+              ? "dark"
+              : "light";
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.lang =
+            languagePreference === "es" || (languagePreference === "system" && prefersSpanish)
+              ? "es"
+              : "en";
+          document.documentElement.dataset.languagePreference = languagePreference;
+        } catch (error) {
+          document.documentElement.dataset.theme = "light";
+          document.documentElement.dataset.themePreference = "system";
+          document.documentElement.dataset.languagePreference = "system";
+        }
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="thanks-page">
@@ -39,5 +64,29 @@
         <a class="button primary" href="/">Back to SemaForce</a>
       </section>
     </main>
+    <script>
+      const languagePreference = (() => {
+        try {
+          return localStorage.getItem("semaforce-language") || "system";
+        } catch (error) {
+          return "system";
+        }
+      })();
+      const language =
+        languagePreference === "es" ||
+        (languagePreference === "system" && navigator.language.toLowerCase().startsWith("es"))
+          ? "es"
+          : "en";
+
+      if (language === "es") {
+        document.documentElement.lang = "es";
+        document.title = "SemaForce | Consulta recibida";
+        document.querySelector(".section-kicker").textContent = "Consulta recibida";
+        document.querySelector("#thanks-title").textContent = "Gracias. Responderemos pronto.";
+        document.querySelector(".thanks-card p:not(.section-kicker)").textContent =
+          "Tu mensaje fue enviado a SemaForce. Responderemos pronto con los siguientes pasos.";
+        document.querySelector(".thanks-card .button").textContent = "Volver a SemaForce";
+      }
+    </script>
   </body>
 </html>
