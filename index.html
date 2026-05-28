@@ -649,14 +649,10 @@
         </div>
         <form
           class="contact-form"
-          action="https://formsubmit.co/lucas@semaforce.dev"
+          action="mailto:lucas@semaforce.dev"
           method="POST"
-          data-ajax-action="https://formsubmit.co/ajax/lucas@semaforce.dev"
+          enctype="text/plain"
         >
-          <input type="hidden" name="_subject" value="New SemaForce inquiry" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_next" value="https://semaforce.dev/thanks.html" />
-          <input type="hidden" name="_url" value="https://semaforce.dev/#contact" />
           <input class="form-hidden" type="text" name="_honey" tabindex="-1" autocomplete="off" />
           <label>
             Name
@@ -674,7 +670,7 @@
             What do you need help with?
             <textarea name="message" rows="5" required></textarea>
           </label>
-          <button type="submit">Send inquiry</button>
+          <button type="submit">Open email draft</button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
       </section>
@@ -687,36 +683,40 @@
     <script>
       const contactForm = document.querySelector(".contact-form");
 
-      if (contactForm && window.fetch) {
-        contactForm.addEventListener("submit", async (event) => {
+      if (contactForm) {
+        contactForm.addEventListener("submit", (event) => {
           event.preventDefault();
 
           const submitButton = contactForm.querySelector("button[type='submit']");
           const status = contactForm.querySelector(".form-status");
-          const action = contactForm.dataset.ajaxAction;
           const formData = new FormData(contactForm);
+          const name = String(formData.get("name") || "").trim();
+          const email = String(formData.get("email") || "").trim();
+          const company = String(formData.get("company") || "").trim();
+          const message = String(formData.get("message") || "").trim();
 
           submitButton.disabled = true;
-          submitButton.textContent = "Sending...";
-          status.textContent = "";
+          submitButton.textContent = "Opening...";
+          status.textContent = "Opening your email client with a SemaForce inquiry draft.";
 
-          try {
-            const response = await fetch(action, {
-              method: "POST",
-              body: formData,
-              headers: { Accept: "application/json" },
-            });
+          const body = [
+            `Name: ${name}`,
+            `Email: ${email}`,
+            company ? `Company: ${company}` : "Company:",
+            "",
+            "Message:",
+            message,
+          ].join("\n");
 
-            if (!response.ok) {
-              throw new Error("Submission failed");
-            }
+          const mailto = new URL("mailto:lucas@semaforce.dev");
+          mailto.searchParams.set("subject", "New SemaForce inquiry");
+          mailto.searchParams.set("body", body);
+          window.location.href = mailto.toString();
 
-            window.location.href = "/thanks.html";
-          } catch (error) {
-            status.textContent =
-              "We could not send this inline. Opening the secure fallback now.";
-            contactForm.submit();
-          }
+          window.setTimeout(() => {
+            submitButton.disabled = false;
+            submitButton.textContent = "Open email draft";
+          }, 1400);
         });
       }
     </script>
