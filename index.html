@@ -415,7 +415,12 @@
             the next ninety days materially easier.
           </p>
         </div>
-        <form class="contact-form" action="https://formsubmit.co/2d194e255fdcbbe3d091391bbe78709d" method="POST">
+        <form
+          class="contact-form"
+          action="https://formsubmit.co/2d194e255fdcbbe3d091391bbe78709d"
+          method="POST"
+          data-ajax-action="https://formsubmit.co/ajax/2d194e255fdcbbe3d091391bbe78709d"
+        >
           <input type="hidden" name="_subject" value="New SemaForce inquiry" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_next" value="https://semaforce.dev/thanks.html" />
@@ -438,6 +443,7 @@
             <textarea name="message" rows="5" required></textarea>
           </label>
           <button type="submit">Send inquiry</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
         </form>
       </section>
     </main>
@@ -446,5 +452,41 @@
       <span>SemaForce LLC</span>
       <a href="mailto:lucas@semaforce.dev">lucas@semaforce.dev</a>
     </footer>
+    <script>
+      const contactForm = document.querySelector(".contact-form");
+
+      if (contactForm && window.fetch) {
+        contactForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const submitButton = contactForm.querySelector("button[type='submit']");
+          const status = contactForm.querySelector(".form-status");
+          const action = contactForm.dataset.ajaxAction;
+          const formData = new FormData(contactForm);
+
+          submitButton.disabled = true;
+          submitButton.textContent = "Sending...";
+          status.textContent = "";
+
+          try {
+            const response = await fetch(action, {
+              method: "POST",
+              body: formData,
+              headers: { Accept: "application/json" },
+            });
+
+            if (!response.ok) {
+              throw new Error("Submission failed");
+            }
+
+            window.location.href = "/thanks.html";
+          } catch (error) {
+            status.textContent =
+              "We could not send this inline. Opening the secure fallback now.";
+            contactForm.submit();
+          }
+        });
+      }
+    </script>
   </body>
 </html>

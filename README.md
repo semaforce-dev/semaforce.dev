@@ -87,7 +87,9 @@ redirects to the apex domain. GitHub Pages HTTPS enforcement is enabled.
 The contact form posts over HTTPS to FormSubmit's activated invisible endpoint
 for `earl.lucas@gmail.com` and redirects successful submissions to
 `/thanks.html`. The public site can still display `lucas@semaforce.dev`, while
-the form backend forwards to a mailbox Lucas can receive.
+the form backend forwards to a mailbox Lucas can receive. The form uses
+FormSubmit's AJAX endpoint when JavaScript is available so visitors stay on
+SemaForce-branded pages; the normal POST endpoint remains as a fallback.
 
 If GitHub Pages gets stuck with `The certificate does not exist yet`, the
 recovery path that worked on 2026-05-28 was:
