@@ -84,6 +84,10 @@ CNAME www  semaforce-dev.github.io
 The site is live at `https://semaforce.dev/`; `https://www.semaforce.dev/`
 redirects to the apex domain. GitHub Pages HTTPS enforcement is enabled.
 
+The contact form posts over HTTPS to FormSubmit for `lucas@semaforce.dev` and
+redirects successful submissions to `/thanks.html`. The first live submission
+may require mailbox confirmation before FormSubmit starts forwarding messages.
+
 If GitHub Pages gets stuck with `The certificate does not exist yet`, the
 recovery path that worked on 2026-05-28 was:
 
@@ -127,4 +131,4 @@ Where `enforce-https.json` contains:
 - Replace the stock hero image with a SemaForce-owned visual asset or generated brand image.
 - Decide whether SemaForce is primarily positioned as technical staffing, consulting, DevOps/security, or a blended delivery partner.
 - Add proof: client logos, testimonials, case studies, compliance language, and clear talent intake flow.
-- Replace `mailto:` with a real form provider before production.
+- Replace the static form provider with a first-party API endpoint if SemaForce needs CRM routing, stronger spam controls, or private data retention guarantees.
