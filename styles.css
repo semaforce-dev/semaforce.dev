@@ -180,6 +180,8 @@ nav a:hover {
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.08em;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
   text-transform: uppercase;
 }
 
@@ -923,6 +925,10 @@ footer {
 }
 
 @media (max-width: 520px) {
+  .hero .eyebrow {
+    max-width: 25ch;
+  }
+
   h1 {
     font-size: clamp(3rem, 14vw, 4.2rem);
     line-height: 0.9;
