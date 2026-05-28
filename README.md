@@ -76,9 +76,46 @@ AAAA  @    2606:50c0:8003::153
 CNAME www  semaforce-dev.github.io
 ```
 
-The site is live at `http://semaforce.dev/`. GitHub Pages HTTPS enforcement is
-pending certificate issuance; retry enabling "Enforce HTTPS" after GitHub
-finishes provisioning the certificate.
+The site is live at `https://semaforce.dev/`; `https://www.semaforce.dev/`
+redirects to the apex domain. GitHub Pages HTTPS enforcement is enabled.
+
+If GitHub Pages gets stuck with `The certificate does not exist yet`, the
+recovery path that worked on 2026-05-28 was:
+
+```bash
+gh api -X DELETE repos/semaforce-dev/semaforce.dev/pages --silent
+gh api -X POST repos/semaforce-dev/semaforce.dev/pages \
+  -f build_type=workflow \
+  -f 'source[branch]=main' \
+  -f 'source[path]=/'
+gh api -X PUT repos/semaforce-dev/semaforce.dev/pages \
+  -H 'Accept: application/vnd.github+json' \
+  -H 'X-GitHub-Api-Version: 2026-03-10' \
+  --input - < reconnect-pages.json
+gh workflow run deploy-pages.yml --repo semaforce-dev/semaforce.dev --ref main
+```
+
+Where `reconnect-pages.json` contains:
+
+```json
+{"cname":"semaforce.dev","source":{"branch":"main","path":"/"}}
+```
+
+After the Pages API reports `https_certificate.state` as `approved`, enable
+enforcement:
+
+```bash
+gh api -X PUT repos/semaforce-dev/semaforce.dev/pages \
+  -H 'Accept: application/vnd.github+json' \
+  -H 'X-GitHub-Api-Version: 2026-03-10' \
+  --input - < enforce-https.json
+```
+
+Where `enforce-https.json` contains:
+
+```json
+{"cname":"semaforce.dev","https_enforced":true,"source":{"branch":"main","path":"/"}}
+```
 
 ## Next Iterations
 
