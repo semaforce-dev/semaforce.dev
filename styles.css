@@ -236,7 +236,7 @@ h2 {
   background: #f9fbf7;
 }
 
-.competency-grid {
+.capability-board {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
@@ -244,13 +244,23 @@ h2 {
   background: #cfdad4;
 }
 
-.competency-grid article {
-  min-height: 210px;
+.capability-board article {
+  min-height: 250px;
   padding: 24px;
   background: var(--white);
 }
 
-.competency-grid h3 {
+.capability-board span {
+  display: inline-block;
+  margin-bottom: 26px;
+  color: var(--coral);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.capability-board h3 {
   margin: 0 0 12px;
   color: var(--green);
   font-size: 1.2rem;
@@ -278,13 +288,82 @@ h2 {
 }
 
 .card p,
-.competency-grid p,
+.capability-board p,
 .timeline p,
 .talent-panel li,
 .stat span {
   margin: 0;
   color: var(--muted);
   line-height: 1.55;
+}
+
+.experience {
+  width: 100%;
+  padding-inline: max(18px, calc((100vw - 1160px) / 2));
+  background: #fffaf1;
+}
+
+.logo-wall {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.logo-card {
+  min-height: 182px;
+  display: grid;
+  grid-template-rows: 56px auto auto;
+  align-content: start;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid #e4d7c1;
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.logo-card img {
+  max-width: 132px;
+  max-height: 46px;
+  align-self: center;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.logo-card strong {
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.15;
+}
+
+.logo-card span {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.42;
+}
+
+.logo-fallback {
+  align-self: center;
+  color: var(--green);
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.industry-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.industry-grid span {
+  padding: 10px 12px;
+  border: 1px solid #e4d7c1;
+  border-radius: 999px;
+  color: var(--green);
+  background: rgba(255, 255, 255, 0.76);
+  font-size: 0.9rem;
+  font-weight: 800;
 }
 
 .split {
@@ -457,10 +536,14 @@ footer {
   .split,
   .contact,
   .grid.three,
-  .competency-grid,
+  .capability-board,
   .timeline,
   .proof {
     grid-template-columns: 1fr;
+  }
+
+  .logo-wall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .intro,
@@ -476,6 +559,11 @@ footer {
     min-height: auto;
   }
 
+  .capability-board article,
+  .logo-card {
+    min-height: auto;
+  }
+
   .proof {
     margin-top: 52px;
     margin-bottom: 52px;
@@ -485,5 +573,11 @@ footer {
   button {
     width: 100%;
     text-align: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .logo-wall {
+    grid-template-columns: 1fr;
   }
 }

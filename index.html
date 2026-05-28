@@ -12,6 +12,8 @@
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="/assets/site.webmanifest" />
     <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="preconnect" href="https://t0.gstatic.com" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -20,6 +22,7 @@
       <nav aria-label="Main navigation">
         <a href="#clients">Clients</a>
         <a href="#competencies">Competencies</a>
+        <a href="#experience">Experience</a>
         <a href="#talent">Talent</a>
         <a href="#work">Work</a>
         <a href="#contact">Contact</a>
@@ -95,34 +98,115 @@
           <h2 id="competencies-title">A bench built around real software delivery.</h2>
           <p>
             SemaForce draws from hands-on leadership across backend platforms, cloud migration,
-            data systems, AI-enabled products, and the operating habits that keep teams shipping.
+            regulated software, AI-enabled products, and the operating habits that keep teams shipping.
           </p>
         </div>
-        <div class="competency-grid">
+        <div class="capability-board">
           <article>
-            <h3>Engineering leadership</h3>
-            <p>Team mentorship, technical planning, stakeholder communication, delivery rhythm, and cross-functional execution.</p>
+            <span>Systems languages</span>
+            <h3>Rust, Java, and the JVM</h3>
+            <p>
+              Rust services and libraries, Java platforms, Kotlin/Scala-adjacent JVM work, API design,
+              concurrency, testing, and production-grade service maintenance.
+            </p>
           </article>
           <article>
-            <h3>Backend and platform systems</h3>
-            <p>APIs, microservices, event-driven architecture, payments, reconciliation, integrations, and high-throughput services.</p>
+            <span>Cloud platforms</span>
+            <h3>AWS, GCP, Azure, and smaller clouds</h3>
+            <p>
+              Cloud architecture, migrations, IAM, networking, queues, storage, databases, serverless,
+              observability, and pragmatic hosting on providers from hyperscalers to Linode-style platforms.
+            </p>
           </article>
           <article>
-            <h3>AI chatbots and agentic workflows</h3>
-            <p>Useful AI assistants, workflow automation, retrieval-aware systems, tool orchestration, and human-in-the-loop controls.</p>
+            <span>Infrastructure as code</span>
+            <h3>Terraform, Terragrunt, Kubernetes, Docker</h3>
+            <p>
+              Reproducible environments, Kubernetes and ecosystem tooling, container build pipelines,
+              CI/CD, release safety, secrets handling, and operational runbooks.
+            </p>
           </article>
           <article>
-            <h3>Cloud, DevOps, and observability</h3>
-            <p>AWS, GCP, Terraform, CI/CD, incident response, monitoring, logging, and reliability-minded infrastructure.</p>
+            <span>Product interfaces</span>
+            <h3>React, Next.js, Angular, Tailwind, WASM</h3>
+            <p>
+              Frontend systems that support real workflows: dashboards, internal tools, polished
+              marketing sites, component patterns, performance, accessibility, and WebAssembly paths.
+            </p>
           </article>
           <article>
-            <h3>Data and automation</h3>
-            <p>SQL, Python, data pipelines, document ingestion, operational reporting, and process automation for messy business systems.</p>
+            <span>Mobile and runtimes</span>
+            <h3>Swift/iOS, Node.js, and service ecosystems</h3>
+            <p>
+              Swift and iOS development, Node.js backends, TypeScript tooling, integrations, automation
+              scripts, and full-stack glue that keeps products moving.
+            </p>
           </article>
           <article>
-            <h3>Security-aware implementation</h3>
-            <p>Authentication, authorization, compliance-sensitive delivery, auditability, testing, and practical risk reduction.</p>
+            <span>AI-enabled delivery</span>
+            <h3>Chatbots, agents, retrieval, and workflow automation</h3>
+            <p>
+              Useful assistants, agentic flows, retrieval-aware systems, tool orchestration,
+              human-in-the-loop controls, and memory systems built for actual business use.
+            </p>
           </article>
+        </div>
+      </section>
+
+      <section id="experience" class="band experience" aria-labelledby="experience-title">
+        <div class="section-heading">
+          <p class="section-kicker">Portfolio foundation</p>
+          <h2 id="experience-title">Experience across regulated, operationally serious environments.</h2>
+          <p>
+            This is the beginning of a deeper portfolio. Today it shows the kinds of companies,
+            industries, and technical contexts SemaForce can credibly support.
+          </p>
+        </div>
+        <div class="logo-wall" aria-label="Companies with relevant team experience">
+          <article class="logo-card">
+            <img src="https://www.google.com/s2/favicons?domain=fidelity.com&sz=128" alt="Fidelity logo" loading="lazy" />
+            <strong>Fidelity</strong>
+            <span>Finance and investing platforms</span>
+          </article>
+          <article class="logo-card">
+            <img src="https://www.google.com/s2/favicons?domain=lumina.co&sz=128" alt="Lumina logo" loading="lazy" />
+            <strong>Lumina Teams</strong>
+            <span>HR and recruiting products</span>
+          </article>
+          <article class="logo-card text-logo">
+            <div class="logo-fallback">Pago People</div>
+            <strong>Pago People</strong>
+            <span>HR technology and people operations</span>
+          </article>
+          <article class="logo-card">
+            <img src="https://www.google.com/s2/favicons?domain=elevancehealth.com&sz=128" alt="Elevance Health logo" loading="lazy" />
+            <strong>Elevance Health</strong>
+            <span>Healthcare and PHI-sensitive systems</span>
+          </article>
+          <article class="logo-card">
+            <img src="https://www.google.com/s2/favicons?domain=cableone.biz&sz=128" alt="Cable One logo" loading="lazy" />
+            <strong>Cable One</strong>
+            <span>Telecom and broadband operations</span>
+          </article>
+          <article class="logo-card">
+            <img src="https://www.google.com/s2/favicons?domain=claraanalytics.com&sz=128" alt="CLARA Analytics logo" loading="lazy" />
+            <strong>CLARA Analytics</strong>
+            <span>Insurance technology and AI claims</span>
+          </article>
+        </div>
+        <div class="industry-grid" aria-label="Industry experience">
+          <span>Fintech</span>
+          <span>Finance</span>
+          <span>Banking</span>
+          <span>Telecom</span>
+          <span>Healthcare</span>
+          <span>PHI</span>
+          <span>Regulated environments</span>
+          <span>HR products</span>
+          <span>Govtech</span>
+          <span>Licensing</span>
+          <span>Insurance technology</span>
+          <span>Startups and enterprises</span>
         </div>
       </section>
 
@@ -183,16 +267,16 @@
           <span>Chatbots, agents, retrieval, automation</span>
         </div>
         <div class="stat">
-          <strong>Data</strong>
-          <span>SQL, Python, pipelines, reporting</span>
+          <strong>Cloud</strong>
+          <span>AWS, GCP, Azure, Kubernetes, Terraform</span>
         </div>
         <div class="stat">
           <strong>Platform</strong>
-          <span>APIs, backend systems, cloud</span>
+          <span>Rust, JVM, Node.js, APIs, backend systems</span>
         </div>
         <div class="stat">
           <strong>Trust</strong>
-          <span>Security-aware implementation</span>
+          <span>Regulated delivery, PHI, auditability, security</span>
         </div>
       </section>
 
