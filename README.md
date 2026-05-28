@@ -9,6 +9,11 @@ Local-first static prototype built by Hermes/Codex.
 - Lucas resume source for software leadership, backend/platform, cloud, data, DevOps, observability, and systems competencies.
 - Public Semaforce/DevOps-security positioning was treated as directional only, not copied as a verified claim for SemaForce LLC.
 - Favicon uses the compact SemaForce SF mark in the site palette until the final source logo package is selected.
+- Lumina Teams assets are sourced from the Hermes project at
+  `/Users/lucasearl/Hermes/projects/lumina-teams-production-readiness/repos/frontend/public/`
+  so future portfolio work uses the project-owned logo instead of a generic external favicon lookup.
+- Pago People uses the favicon supplied from
+  `/Users/lucasearl/Hermes/projects/pago-people/repos/frontend/public/favicon.ico`.
 
 ## Run Locally
 
