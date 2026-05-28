@@ -289,12 +289,42 @@ h2 {
 
 .card p,
 .capability-board p,
+.science-grid p,
 .timeline p,
 .talent-panel li,
 .stat span {
   margin: 0;
   color: var(--muted);
   line-height: 1.55;
+}
+
+.data-science {
+  width: 100%;
+  padding-inline: max(18px, calc((100vw - 1160px) / 2));
+  background: #eff7f8;
+  border-top: 1px solid #c7dddf;
+  border-bottom: 1px solid #c7dddf;
+}
+
+.science-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.science-grid article {
+  min-height: 224px;
+  padding: 24px;
+  border: 1px solid #c7dddf;
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.science-grid h3 {
+  margin: 0 0 12px;
+  color: var(--teal);
+  font-size: 1.2rem;
+  line-height: 1.18;
 }
 
 .experience {
@@ -537,6 +567,7 @@ footer {
   .contact,
   .grid.three,
   .capability-board,
+  .science-grid,
   .timeline,
   .proof {
     grid-template-columns: 1fr;
@@ -560,6 +591,7 @@ footer {
   }
 
   .capability-board article,
+  .science-grid article,
   .logo-card {
     min-height: auto;
   }
