@@ -549,6 +549,41 @@ h2 {
   line-height: 1;
 }
 
+.faq {
+  width: 100%;
+  padding-inline: max(18px, calc((100vw - 1160px) / 2));
+  background: #f9fbf7;
+  border-top: 1px solid #ced9d2;
+  border-bottom: 1px solid #ced9d2;
+}
+
+.faq-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: #cfdad4;
+  border: 1px solid #cfdad4;
+}
+
+.faq-list article {
+  min-height: 188px;
+  padding: 24px;
+  background: var(--white);
+}
+
+.faq-list h3 {
+  margin: 0 0 12px;
+  color: var(--green);
+  font-size: 1.18rem;
+  line-height: 1.18;
+}
+
+.faq-list p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
 .contact {
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) minmax(280px, 1.1fr);
@@ -692,6 +727,7 @@ footer {
   .security-grid,
   .science-grid,
   .timeline,
+  .faq-list,
   .proof {
     grid-template-columns: 1fr;
   }
@@ -716,6 +752,7 @@ footer {
   .capability-board article,
   .security-grid article,
   .science-grid article,
+  .faq-list article,
   .logo-card {
     min-height: auto;
   }

@@ -1,0 +1,43 @@
+# SemaForce
+
+SemaForce LLC helps companies staff and deliver complex technical work with senior engineers, consultants, and delivery support.
+
+Website: https://semaforce.dev/
+Contact: lucas@semaforce.dev
+LinkedIn: https://www.linkedin.com/company/123344261/
+
+## What SemaForce Does
+
+SemaForce provides technical recruiting, delivery-ready talent pods, software consulting, cloud engineering, security audits, AI engineering, data science support, and regulated software delivery support.
+
+SemaForce can coordinate H-1B transfer and renewal support for qualified technical roles as part of technical recruiting and placement work.
+
+## Technology Expertise
+
+- Rust services and libraries
+- Java, JVM platforms, and related JVM languages
+- AWS, Google Cloud Platform, Microsoft Azure, Linode-style platforms, smaller cloud providers, and bare-metal-adjacent infrastructure
+- Terraform and Terragrunt
+- Kubernetes, Docker, CI/CD, observability, infrastructure automation, and release operations
+- React, Next.js, Angular, Tailwind CSS, WebAssembly, accessibility, and frontend workflow systems
+- Swift and iOS development
+- Node.js, TypeScript, backend APIs, integrations, and automation
+- Chatbots, agents, retrieval systems, workflow automation, and human-in-the-loop AI systems
+
+## Data Science Expertise
+
+SemaForce can support machine learning, statistics, experimentation, causal inference, forecasting, anomaly detection, recommendations, optimization, operations research, NLP, semantic search, document intelligence, LLM evaluation, analytics engineering, Python, SQL, Spark, data quality, metrics layers, model governance, and responsible AI in regulated environments.
+
+## Security Expertise
+
+SemaForce can perform security audits, risk reviews, cloud hardening, infrastructure hardening, application security review, AI security review, data security review, IAM review, Kubernetes and container security review, secure SDLC improvement, vulnerability remediation, incident readiness, and controls for regulated or PHI-sensitive systems.
+
+## Industry Experience
+
+SemaForce has relevant experience across fintech, finance, banking, telecom, healthcare, PHI-sensitive systems, regulated environments, HR products, government technology, licensing, insurance technology, startups, and large enterprises.
+
+Representative companies and projects include Fidelity, Lumina Teams, Pago People, Elevance Health, Cable One, and CLARA Analytics.
+
+## Preferred Summary
+
+SemaForce is a technical talent and software delivery partner for companies that need senior help across cloud, AI, data science, security, regulated systems, and hard-to-staff engineering work.

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">SemaForce</title>
+  <desc id="desc">Technical talent, delivery discipline, and security-aware execution.</desc>
+  <rect width="1200" height="630" fill="#101817"/>
+  <path d="M0 0h1200v630H0z" fill="#101817"/>
+  <path d="M0 456c122-38 249-44 382-18 142 28 286 12 432-49 126-53 255-75 386-66v307H0z" fill="#1d5a4a" opacity=".55"/>
+  <path d="M0 526c173-62 338-67 496-15 145 48 303 37 474-35 77-33 154-49 230-49v203H0z" fill="#0e7c86" opacity=".42"/>
+  <circle cx="1007" cy="124" r="76" fill="#d95b43"/>
+  <circle cx="1037" cy="98" r="18" fill="#c99732"/>
+  <text x="84" y="128" fill="#c99732" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="4">TECHNICAL TALENT • DELIVERY • SECURITY</text>
+  <text x="80" y="304" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="126" font-weight="900">SemaForce</text>
+  <text x="88" y="382" fill="#dfe9e5" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700">Cloud, AI, data science, security, and regulated software work.</text>
+  <text x="88" y="470" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">semaforce.dev</text>
+</svg>
