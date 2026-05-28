@@ -84,10 +84,12 @@ CNAME www  semaforce-dev.github.io
 The site is live at `https://semaforce.dev/`; `https://www.semaforce.dev/`
 redirects to the apex domain. GitHub Pages HTTPS enforcement is enabled.
 
-The contact form opens a prefilled email draft to `lucas@semaforce.dev`.
-FormSubmit was removed after its activated endpoint continued delivering
-submissions to `earl.lucas@gmail.com`. Keep the static form on `mailto:` until a
-business-owned form backend or worker is configured.
+The contact form posts over HTTPS to FormSubmit for `lucas@semaforce.dev` and
+redirects successful submissions to `/thanks.html`. FormSubmit may require a
+one-time activation click from the receiving mailbox after the first submission.
+The form uses FormSubmit's AJAX endpoint when JavaScript is available so
+visitors stay on SemaForce-branded pages; the normal POST endpoint remains as a
+fallback.
 
 If GitHub Pages gets stuck with `The certificate does not exist yet`, the
 recovery path that worked on 2026-05-28 was:
