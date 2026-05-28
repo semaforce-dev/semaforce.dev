@@ -84,9 +84,11 @@ CNAME www  semaforce-dev.github.io
 The site is live at `https://semaforce.dev/`; `https://www.semaforce.dev/`
 redirects to the apex domain. GitHub Pages HTTPS enforcement is enabled.
 
-The contact form posts over HTTPS to FormSubmit for `lucas@semaforce.dev` and
-redirects successful submissions to `/thanks.html`. The first live submission
-may require mailbox confirmation before FormSubmit starts forwarding messages.
+The contact form posts over HTTPS to FormSubmit for `earl.lucas@gmail.com` and
+redirects successful submissions to `/thanks.html`. The public site can still
+display `lucas@semaforce.dev`, but FormSubmit activation has to land in a
+mailbox Lucas can receive. The first live submission may require mailbox
+confirmation before FormSubmit starts forwarding messages.
 
 If GitHub Pages gets stuck with `The certificate does not exist yet`, the
 recovery path that worked on 2026-05-28 was:
