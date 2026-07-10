@@ -53,11 +53,11 @@ a {
   position: fixed;
   inset: 0 0 auto;
   z-index: 10;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 22px;
-  padding: 18px clamp(18px, 4vw, 56px);
+  gap: clamp(16px, 2.2vw, 30px);
+  padding: 14px clamp(18px, 2.4vw, 36px);
   color: #ffffff;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0));
 }
@@ -71,14 +71,18 @@ a {
 
 nav {
   display: flex;
-  gap: clamp(14px, 2.4vw, 32px);
-  font-size: 0.92rem;
+  justify-content: center;
+  gap: clamp(12px, 1.6vw, 24px);
+  min-width: 0;
+  font-size: clamp(0.82rem, 0.92vw, 0.92rem);
   font-weight: 650;
+  line-height: 1;
 }
 
 nav a {
   text-decoration: none;
   opacity: 0.9;
+  white-space: nowrap;
 }
 
 nav a:hover {
@@ -87,42 +91,45 @@ nav a:hover {
 
 .site-controls {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
   justify-content: flex-end;
-  gap: 8px;
-  max-width: 470px;
+  gap: 6px;
+  width: max-content;
+  min-width: 0;
 }
 
 .segmented-control {
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  min-height: 34px;
+  min-height: 30px;
   padding: 3px;
   border: 1px solid rgba(255, 255, 255, 0.26);
   border-radius: 8px;
   background: rgba(8, 13, 12, 0.32);
   backdrop-filter: blur(14px);
+  white-space: nowrap;
 }
 
 .segmented-control span {
-  padding: 0 8px;
+  padding: 0 7px;
   color: rgba(255, 255, 255, 0.68);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 850;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .segmented-control button {
-  min-height: 28px;
+  min-height: 24px;
   width: auto;
   border: 0;
   border-radius: 6px;
-  padding: 5px 8px;
+  padding: 4px 8px;
   color: rgba(255, 255, 255, 0.78);
   background: transparent;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 850;
 }
 
@@ -250,12 +257,101 @@ button:disabled {
 }
 
 .intro,
+.ai-brief,
 .band,
 .split,
 .proof,
 .contact {
   width: min(1160px, calc(100% - 36px));
   margin: 0 auto;
+}
+
+.ai-brief {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.88fr) minmax(300px, 1.12fr);
+  gap: clamp(28px, 6vw, 76px);
+  align-items: start;
+  padding: 72px 0 64px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ai-brief-copy p:not(.section-kicker),
+.ai-panel p {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1.03rem, 1.6vw, 1.2rem);
+  line-height: 1.62;
+}
+
+.ai-panel .ai-note {
+  margin-top: 18px;
+  color: var(--green);
+  font-size: 0.96rem;
+  font-weight: 850;
+}
+
+.ai-panel {
+  padding: clamp(22px, 4vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.ai-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.prompt-preview {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 850;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.prompt-preview textarea {
+  min-height: 168px;
+  resize: vertical;
+  color: var(--ink);
+  background: #fbfcf9;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.ai-link,
+.copy-prompt {
+  width: 100%;
+  text-align: center;
+}
+
+.ai-link {
+  border-color: var(--line);
+  color: var(--ink);
+  background: #f9fbf7;
+}
+
+.copy-prompt {
+  background: var(--green);
+}
+
+.ai-source {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--green);
+  font-weight: 850;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 .intro {
@@ -346,6 +442,45 @@ h2 {
   line-height: 1.18;
 }
 
+.consulting {
+  width: 100%;
+  padding-inline: max(18px, calc((100vw - 1160px) / 2));
+  background: #f6f1e7;
+  border-top: 1px solid #ded2be;
+  border-bottom: 1px solid #ded2be;
+}
+
+.consulting-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.consulting-grid article {
+  min-height: 238px;
+  padding: 24px;
+  border: 1px solid #e0d4c1;
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.consulting-grid span {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: var(--coral);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.consulting-grid h3 {
+  margin: 0 0 12px;
+  color: var(--green);
+  font-size: 1.2rem;
+  line-height: 1.18;
+}
+
 .card-icon {
   display: inline-grid;
   width: 40px;
@@ -368,6 +503,7 @@ h2 {
 
 .card p,
 .capability-board p,
+.consulting-grid p,
 .science-grid p,
 .timeline p,
 .talent-panel li,
@@ -747,6 +883,23 @@ html[data-theme="dark"] .faq-list {
   background: #2c3d38;
 }
 
+html[data-theme="dark"] .ai-link {
+  background: #0f1916;
+}
+
+html[data-theme="dark"] .ai-source {
+  color: var(--teal);
+}
+
+html[data-theme="dark"] .consulting {
+  background: #171712;
+  border-color: #3e3729;
+}
+
+html[data-theme="dark"] .consulting-grid article {
+  border-color: #3e3729;
+}
+
 html[data-theme="dark"] .data-science {
   background: #0d1d1f;
   border-color: #254246;
@@ -784,6 +937,10 @@ html[data-theme="dark"] .work {
 html[data-theme="dark"] input,
 html[data-theme="dark"] textarea {
   background: #0f1715;
+}
+
+html[data-theme="dark"] .prompt-preview textarea {
+  background: #0d1412;
 }
 
 html[data-theme="dark"] .thanks-page {
@@ -845,9 +1002,10 @@ footer {
   line-height: 1.65;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 1120px) {
   .site-header {
     position: absolute;
+    grid-template-columns: auto 1fr;
     align-items: flex-start;
     gap: 14px;
   }
@@ -857,10 +1015,14 @@ footer {
   }
 
   .site-controls {
-    max-width: min(100%, 420px);
+    flex-wrap: wrap;
+    width: min-content;
+    min-width: 218px;
     margin-left: auto;
   }
+}
 
+@media (max-width: 820px) {
   .segmented-control span {
     padding: 0 6px;
     font-size: 0.64rem;
@@ -875,10 +1037,12 @@ footer {
   }
 
   .intro,
+  .ai-brief,
   .split,
   .contact,
   .grid.three,
   .capability-board,
+  .consulting-grid,
   .security-grid,
   .science-grid,
   .timeline,
@@ -892,6 +1056,7 @@ footer {
   }
 
   .intro,
+  .ai-brief,
   .band,
   .split,
   .contact {
@@ -922,6 +1087,10 @@ footer {
     width: 100%;
     text-align: center;
   }
+
+  .ai-actions {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 520px) {
@@ -943,11 +1112,12 @@ footer {
   }
 
   .site-header {
-    flex-wrap: wrap;
+    grid-template-columns: 1fr;
   }
 
   .site-controls {
     width: 100%;
+    min-width: 0;
     justify-content: flex-start;
   }
 }
